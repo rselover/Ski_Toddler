@@ -1,0 +1,9 @@
+{
+  "name": "phish-map",
+  "version": "1.0.0",
+  "description": "Phish Song Count by City",
+  "main": "app.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT"
+}
