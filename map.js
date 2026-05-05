@@ -2,6 +2,20 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicnNlbG92ZXIiLCJhIjoiY21hbGJxMGxjMDZ6MDJtb3JqM
 
 /*const geojsonUrl = 'https://gist.githubusercontent.com/rselover/0ee2da020db757f2b35c8ec8b8b51888/raw/22a6f75fb1c6dca6073684e652dec25e27a98f83/Ski_Toddler.json';
 */
+function formatKey(key) {
+  return key
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/[_-]/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function buildInfoLines(prop) {
+  return Object.entries(prop)
+    .filter(([key]) => key !== 'name')
+    .map(([key, val]) => `${formatKey(key)}: ${val}`)
+    .join('<br>');
+}
+
 function initMap() {
   const mapDiv = document.getElementById('map');
 
@@ -44,7 +58,13 @@ function initMap() {
       const coords = feature.geometry.coordinates; // [lng, lat]
 
       const popup = new mapboxgl.Popup({ offset: 25 })
-        .setHTML(`<h3>${prop.name}</h3><div>Walkup Price: $${prop.walkup}</div>`);
+        .setHTML(`
+          <h3>${prop.name}</h3>
+          <details>
+            <summary>More Info</summary>
+            <div>${buildInfoLines(prop)}</div>
+          </details>
+        `);
 
       const el = document.createElement('span');
       el.className = 'material-symbols-outlined map-marker';
@@ -63,16 +83,26 @@ function initMap() {
       link.className = 'title';
       link.textContent = prop.name;
 
+      const toggle = listing.appendChild(document.createElement('a'));
+      toggle.href = '#';
+      toggle.className = 'more-info';
+      toggle.textContent = 'More Info >';
+
       const details = listing.appendChild(document.createElement('div'));
       details.className = 'details';
-      details.innerHTML = `Walkup: $${prop.walkup}<br>Distance from Denver: ${prop.distance} miles`;
+      details.innerHTML = buildInfoLines(prop);
 
       link.addEventListener('click', e => {
         e.preventDefault();
-        listing.classList.toggle('expanded');
         setActive(listing);
         map.flyTo({ center: coords, zoom: 12 });
         if (!popup.isOpen()) marker.togglePopup();
+      });
+
+      toggle.addEventListener('click', e => {
+        e.preventDefault();
+        const expanded = listing.classList.toggle('expanded');
+        toggle.textContent = expanded ? 'Less Info ∧' : 'More Info >';
       });
 
       marker.getElement().addEventListener('click', () => {

@@ -98,7 +98,7 @@ function App() {
       e(Container, { maxWidth: 'lg' },
         e(Typography, { variant: 'h4', gutterBottom: true }, 'Boston Urban Canopy Distribution'),
         e(Typography, { variant: 'subtitle1', gutterBottom: true },
-          'Boston Urban Canopy Distribution – Where are trees concentrated?'
+          "Toddler Ski Cost – Where's the Best Spot near Denver to Learn to Ski?"
         ),
         e(CollapsibleCard, { title: "Map", defaultOpen: true },
           e('div', {
@@ -112,9 +112,9 @@ function App() {
             }
           })
         ),
-        // e(CollapsibleCard, { title: "Tree Width", defaultOpen: true },
-        //   e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
-        // )
+        e(CollapsibleCard, { title: "Ranked Options", defaultOpen: true },
+          e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
+        )
       )
     )
   );
