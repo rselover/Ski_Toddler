@@ -105,7 +105,6 @@ function App() {
             id: 'map',
             style: {
               width: '100%',
-              height: '60vh',
               margin: '2rem 0',
               border: '1px solid #333',
               borderRadius: '8px',

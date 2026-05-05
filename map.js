@@ -7,7 +7,7 @@ function initMap() {
 
   // Wrap map in a flex container and inject a listings sidebar
   const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'display:flex;height:100%;';
+  wrapper.style.cssText = 'display:flex;align-items:flex-start;';
   mapDiv.parentNode.insertBefore(wrapper, mapDiv);
 
   const listings = document.createElement('div');
@@ -65,10 +65,11 @@ function initMap() {
 
       const details = listing.appendChild(document.createElement('div'));
       details.className = 'details';
-      details.textContent = `Walkup: $${prop.walkup} - Distance from Denver: ${prop.distance} miles`;
+      details.innerHTML = `Walkup: $${prop.walkup}<br>Distance from Denver: ${prop.distance} miles`;
 
       link.addEventListener('click', e => {
         e.preventDefault();
+        listing.classList.toggle('expanded');
         setActive(listing);
         map.flyTo({ center: coords, zoom: 12 });
         if (!popup.isOpen()) marker.togglePopup();
