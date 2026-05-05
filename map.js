@@ -5,8 +5,8 @@ function initMap() {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-71.1, 42.35],
-      zoom: 10,
+      center: [39.7555, -105.2211],
+      zoom: 9,
       pitch: 20,
       bearing: 0
     });
