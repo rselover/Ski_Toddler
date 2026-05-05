@@ -113,9 +113,9 @@ function App() {
             }
           })
         ),
-        e(CollapsibleCard, { title: "Tree Width", defaultOpen: true },
-          e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
-        )
+        // e(CollapsibleCard, { title: "Tree Width", defaultOpen: true },
+        //   e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
+        // )
       )
     )
   );
