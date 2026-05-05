@@ -86,6 +86,7 @@ a:hover { color: #101010; }
 #listings .item .details {
     font-size: 13px;
     color: #888;
+    margin-top: 6px;
 }
 
 /* Thin scrollbar */
@@ -138,4 +139,6 @@ a:hover { color: #101010; }
 
 .mapboxgl-popup-content div {
     padding: 10px;
+    color: #404040;
+    font-weight: 600;
 }
