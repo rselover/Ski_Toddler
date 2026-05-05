@@ -28,7 +28,7 @@ function initMap() {
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
     center: [-105.2211, 39.7555],
-    zoom: 8
+    zoom: 7
   });
 
   function setActive(el) {
