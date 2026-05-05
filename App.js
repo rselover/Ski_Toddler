@@ -60,7 +60,7 @@ function App() {
           onClick: handleDrawerToggle,
           sx: { mr: 2 }
         }, e('span', { className: 'material-icons' }, open ? 'chevron_left' : 'menu')),
-        e(Typography, { variant: 'h6', noWrap: true, component: 'div' }, 'Boston Uban Canopy')
+        e(Typography, { variant: 'h6', noWrap: true, component: 'div' }, 'Denver Learn to Ski Options')
       )
     ),
     e(Drawer, {
@@ -96,7 +96,7 @@ function App() {
     },
       e(Toolbar),
       e(Container, { maxWidth: 'lg' },
-        e(Typography, { variant: 'h4', gutterBottom: true }, 'Boston Urban Canopy Distribution'),
+        e(Typography, { variant: 'h4', gutterBottom: true }, 'Denver Learn to Ski Options'),
         e(Typography, { variant: 'subtitle1', gutterBottom: true },
           "Toddler Ski Cost – Where's the Best Spot near Denver to Learn to Ski?"
         ),
