@@ -2,7 +2,7 @@
 
 A React app (flat structure, JS only) for visualizing Learn To Ski Options for Parents wanting to teach their kids themselves.
 
-https://rselover.github.io/Ski_Toddler/
+https://rselover.github.io/SendIT/
 
 ---
 
