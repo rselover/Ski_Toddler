@@ -29,13 +29,12 @@ const darkTheme = createTheme({
   }
 });
 
-function CollapsibleCard({ title, children, defaultOpen = true }) {
-  const [open, setOpen] = useState(defaultOpen);
+function CollapsibleCard({ title, children, open, onToggle }) {
   return e(Card, { sx: { mb: 3, background: "#222", color: "#eee", borderRadius: 2 } },
     e(CardHeader, {
       title: e(Typography, { variant: 'h6', sx: { color: "#90caf9" } }, title),
       action: e(IconButton, {
-        onClick: () => setOpen(!open),
+        onClick: onToggle,
         color: "inherit"
       }, e('span', { className: 'material-icons' }, open ? 'expand_less' : 'expand_more'))
     }),
@@ -46,9 +45,17 @@ function CollapsibleCard({ title, children, defaultOpen = true }) {
 }
 
 function App() {
-  const [open, setOpen] = useState(false); // Drawer starts closed
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cards, setCards] = useState({ map: true, ranked: true, about: true });
 
-  const handleDrawerToggle = () => setOpen(!open);
+  const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
+  const toggleCard = key => setCards(prev => ({ ...prev, [key]: !prev[key] }));
+  const openOnly = key => {
+    setCards({ map: false, ranked: false, about: false, [key]: true });
+    setTimeout(() => document.getElementById(
+      key === 'map' ? 'map' : key === 'ranked' ? 'plot' : 'about'
+    )?.scrollIntoView({ behavior: 'smooth' }), 50);
+  };
 
   return e(ThemeProvider, { theme: darkTheme },
     e(CssBaseline),
@@ -59,13 +66,13 @@ function App() {
           edge: 'start',
           onClick: handleDrawerToggle,
           sx: { mr: 2 }
-        }, e('span', { className: 'material-icons' }, open ? 'chevron_left' : 'menu')),
+        }, e('span', { className: 'material-icons' }, drawerOpen ? 'chevron_left' : 'menu')),
         e(Typography, { variant: 'h6', noWrap: true, component: 'div' }, 'Denver Learn to Ski Options')
       )
     ),
     e(Drawer, {
       variant: 'persistent',
-      open: open,
+      open: drawerOpen,
       sx: {
         width: 240,
         flexShrink: 0,
@@ -75,13 +82,13 @@ function App() {
       e(Toolbar),
       e(Box, { sx: { overflow: 'auto' } },
         e(List, null,
-          e(ListItem, { button: true, onClick: () => document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' }) },
+          e(ListItem, { button: true, onClick: () => openOnly('map') },
             e(ListItemText, { primary: 'Map' })
           ),
-          e(ListItem, { button: true, onClick: () => document.getElementById('plot')?.scrollIntoView({ behavior: 'smooth' }) },
+          e(ListItem, { button: true, onClick: () => openOnly('ranked') },
             e(ListItemText, { primary: 'Ranked Options' })
           ),
-          e(ListItem, { button: true, onClick: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
+          e(ListItem, { button: true, onClick: () => openOnly('about') },
             e(ListItemText, { primary: 'About' })
           )
         )
@@ -93,7 +100,7 @@ function App() {
         flexGrow: 1,
         bgcolor: 'background.default',
         p: 3,
-        marginLeft: open ? '240px' : '0px',
+        marginLeft: drawerOpen ? '240px' : '0px',
         transition: 'margin-left 0.3s'
       }
     },
@@ -103,7 +110,7 @@ function App() {
         e(Typography, { variant: 'subtitle1', gutterBottom: true },
           "Toddler Ski Cost – Where's the Best Spot near Denver to Learn to Ski?"
         ),
-        e(CollapsibleCard, { title: "Map", defaultOpen: true },
+        e(CollapsibleCard, { title: "Map", open: cards.map, onToggle: () => toggleCard('map') },
           e('div', {
             id: 'map',
             style: {
@@ -115,10 +122,10 @@ function App() {
             }
           })
         ),
-        e(CollapsibleCard, { title: "Ranked Options", defaultOpen: true },
+        e(CollapsibleCard, { title: "Ranked Options", open: cards.ranked, onToggle: () => toggleCard('ranked') },
           e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
         ),
-        e(CollapsibleCard, { title: "About", defaultOpen: true },
+        e(CollapsibleCard, { title: "About", open: cards.about, onToggle: () => toggleCard('about') },
           e('div', { id: 'about', style: { padding: '1rem 0' } },
             e(Typography, { variant: 'body1', gutterBottom: true },
               'This app helps parents find the best ski resorts near Denver for toddlers and young kids learning to ski.'
