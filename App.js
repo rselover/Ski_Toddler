@@ -125,6 +125,39 @@ function App() {
             ),
             e(Typography, { variant: 'body2', sx: { color: '#aaa' } },
               'Data includes walkup prices, learn-to-ski acreage, drive times, snowfall, and a composite score ranking each resort for the family ski experience.'
+            ),
+            e(Typography, { variant: 'body2', sx: { mt: 2, color: '#aaa' } },
+              'Made by: Rob Selover and Claude Sonnet 4.6'
+            ),
+            e(Box, { sx: { display: 'flex', gap: 2, mt: 1 } },
+              e('a', {
+                href: 'https://linkedin.com/in/rselover',
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                style: {
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  background: '#0077b5', color: '#fff',
+                  padding: '6px 14px', borderRadius: '4px',
+                  fontWeight: '700', fontSize: '13px', textDecoration: 'none'
+                }
+              },
+                e('span', { className: 'material-icons', style: { fontSize: '16px' } }, 'person'),
+                'LinkedIn'
+              ),
+              e('a', {
+                href: 'https://github.com/rselover',
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                style: {
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  background: '#333', color: '#fff',
+                  padding: '6px 14px', borderRadius: '4px',
+                  fontWeight: '700', fontSize: '13px', textDecoration: 'none'
+                }
+              },
+                e('span', { className: 'material-icons', style: { fontSize: '16px' } }, 'code'),
+                'GitHub'
+              )
             )
           )
         )
