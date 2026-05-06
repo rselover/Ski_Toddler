@@ -1,4 +1,4 @@
-# Denver Learn To Ski Map
+# SendIT - A Learn To Ski Map for Denver Parents
 
 A React app (flat structure, JS only) for visualizing Learn To Ski Options for Parents wanting to teach their kids themselves.
 
