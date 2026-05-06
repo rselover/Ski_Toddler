@@ -6,7 +6,7 @@ https://rselover.github.io/Ski_Toddler/
 
 ---
 
-## Ski Map – Denver Area Learn-to-Ski Guide
+## SendIT – Denver Area Learn-to-Ski Guide
 
 A parent-focused tool for finding the best ski resorts near Denver for toddlers and young kids learning to ski. Compares 13 Front Range resorts across price, distance, terrain, and overall family value.
 

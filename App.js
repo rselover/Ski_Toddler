@@ -67,7 +67,7 @@ function App() {
           onClick: handleDrawerToggle,
           sx: { mr: 2 }
         }, e('span', { className: 'material-icons' }, drawerOpen ? 'chevron_left' : 'menu')),
-        e(Typography, { variant: 'h6', noWrap: true, component: 'div' }, 'Denver Learn to Ski Options')
+        e(Typography, { variant: 'h6', noWrap: true, component: 'div' }, 'SendIT')
       )
     ),
     e(Drawer, {
@@ -106,7 +106,7 @@ function App() {
     },
       e(Toolbar),
       e(Container, { maxWidth: 'lg' },
-        e(Typography, { variant: 'h4', gutterBottom: true }, 'Denver Learn to Ski Options'),
+        e(Typography, { variant: 'h4', gutterBottom: true }, 'SendIT'),
         e(Typography, { variant: 'subtitle1', gutterBottom: true },
           "Toddler Ski Cost – Where's the Best Spot near Denver to Learn to Ski?"
         ),
