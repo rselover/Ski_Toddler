@@ -1,6 +1,6 @@
-# Boston Tree Distribution
+# Denver Learn To Ski Map
 
-A React app (flat structure, JS only) for visualizing Boston Tree Distibution.
+A React app (flat structure, JS only) for visualizing Learn To Ski Options for Parents wanting to teach their kids themselves.
 
 https://rselover.github.io/Ski_Toddler/
 
