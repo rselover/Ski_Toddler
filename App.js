@@ -108,7 +108,7 @@ function App() {
       e(Container, { maxWidth: 'lg' },
         e(Typography, { variant: 'h4', gutterBottom: true }, 'SendIT'),
         e(Typography, { variant: 'subtitle1', gutterBottom: true },
-          "Toddler Ski Cost – Where's the Best Spot near Denver to Learn to Ski?"
+          "Where's the Best Spot near Denver to Self-teach your kids to Ski?"
         ),
         e(CollapsibleCard, { title: "Map", open: cards.map, onToggle: () => toggleCard('map') },
           e('div', {
