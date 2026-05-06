@@ -32,7 +32,7 @@ a:hover { color: #101010; }
 #listings {
     width: 240px;
     flex-shrink: 0;
-    height: auto;
+    height: 60vh;
     background: #fff;
     border-right: 1px solid rgba(0,0,0,0.15);
     display: flex;
@@ -56,7 +56,8 @@ a:hover { color: #101010; }
 }
 
 #listings .listings-scroll {
-    height: auto;
+    overflow-y: auto;
+    flex: 1;
     padding-bottom: 20px;
 }
 
@@ -132,9 +133,9 @@ a:hover { color: #101010; }
 .mapboxgl-popup-close-button { display: none; }
 
 .mapboxgl-popup-content {
-    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+    font: 400 13px/20px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
     padding: 0;
-    width: 200px;
+    width: 220px;
     border-radius: 3px;
 }
 
@@ -143,9 +144,10 @@ a:hover { color: #101010; }
     color: #fff;
     margin: 0;
     display: block;
-    padding: 10px;
+    padding: 7px 10px;
     border-radius: 3px 3px 0 0;
     font-weight: 700;
+    font-size: 13px;
 }
 
 .mapboxgl-popup-content div {
@@ -173,10 +175,13 @@ details[open] .mapboxgl-popup-content summary::after,
 .mapboxgl-popup-content summary:hover { color: #00853e; }
 
 .mapboxgl-popup-content details div {
-    padding: 6px 0 0;
+    padding: 4px 0 0;
     font-weight: 400;
     color: #888;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 18px;
+    max-height: 120px;
+    overflow-y: auto;
 }
 
 /* Resort data table */

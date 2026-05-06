@@ -108,7 +108,7 @@ function App() {
             id: 'map',
             style: {
               width: '100%',
-              margin: '2rem 0',
+              height: '60vh',
               border: '1px solid #333',
               borderRadius: '8px',
               background: '#222'
