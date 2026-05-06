@@ -75,10 +75,13 @@ function App() {
       e(Toolbar),
       e(Box, { sx: { overflow: 'auto' } },
         e(List, null,
-          e(ListItem, { button: true },
+          e(ListItem, { button: true, onClick: () => document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' }) },
             e(ListItemText, { primary: 'Map' })
           ),
-          e(ListItem, { button: true },
+          e(ListItem, { button: true, onClick: () => document.getElementById('plot')?.scrollIntoView({ behavior: 'smooth' }) },
+            e(ListItemText, { primary: 'Ranked Options' })
+          ),
+          e(ListItem, { button: true, onClick: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
             e(ListItemText, { primary: 'About' })
           )
         )
@@ -114,6 +117,16 @@ function App() {
         ),
         e(CollapsibleCard, { title: "Ranked Options", defaultOpen: true },
           e('div', { id: 'plot', style: { width: '100%', margin: '2rem 0' } })
+        ),
+        e(CollapsibleCard, { title: "About", defaultOpen: true },
+          e('div', { id: 'about', style: { padding: '1rem 0' } },
+            e(Typography, { variant: 'body1', gutterBottom: true },
+              'This app helps parents find the best ski resorts near Denver for toddlers and young kids learning to ski.'
+            ),
+            e(Typography, { variant: 'body2', sx: { color: '#aaa' } },
+              'Data includes walkup prices, learn-to-ski acreage, drive times, snowfall, and a composite score ranking each resort for the family ski experience.'
+            )
+          )
         )
       )
     )

@@ -1,70 +1,78 @@
-function renderTreeDBHPlot() {
-  loadTreeData().then(data => {
-    // 'data' is already the array of objects from your load function
-    const validData = data
-      .map(d => ({ 
-        dbh: +d.properties?.dbh 
-      }))
-      .filter(d => !isNaN(d.dbh) && d.dbh > 0 && d.dbh < 200);
+function renderTable() {
+  d3.json(geojsonUrl).then(geojson => {
+    const rows = geojson.features.map(f => f.properties);
+    if (!rows.length) return;
 
-    console.log("Records passed to plot:", validData.length);
+    const allColumns = Object.keys(rows[0]);
+    const columns = [
+      allColumns[0],
+      'Score',
+      ...allColumns.filter(c => c !== allColumns[0] && c !== 'Score')
+    ];
+    const scoreExtent = d3.extent(rows, r => +r['Score']);
+    const colorScale = d3.scaleSequential()
+      .domain(scoreExtent)
+      .interpolator(d3.interpolateRdYlGn);
 
     const plotDiv = document.getElementById('plot');
     plotDiv.innerHTML = '';
 
-    if (validData.length === 0) {
-      plotDiv.textContent = "Still no data. Check console for 'Records passed to plot'.";
-      return;
+    const filters = Object.fromEntries(columns.map(c => [c, '']));
+
+    function filteredRows() {
+      return rows.filter(row =>
+        columns.every(col => {
+          const f = filters[col].toLowerCase();
+          return !f || String(row[col] ?? '').toLowerCase().includes(f);
+        })
+      );
     }
 
-    let plotWidth = 700;
-    const parent = plotDiv.parentElement;
-    if (parent) {
-      plotWidth = Math.max(300, parent.clientWidth - 32);
+    const wrapper = d3.select(plotDiv).append('div').style('overflow-x', 'auto');
+    const table = wrapper.append('table').attr('class', 'resort-table');
+    const thead = table.append('thead');
+    const tbody = table.append('tbody');
+
+    thead.append('tr').selectAll('th')
+      .data(columns).enter().append('th').text(d => d);
+
+    thead.append('tr').selectAll('td')
+      .data(columns).enter().append('td')
+      .append('input')
+      .attr('type', 'text')
+      .attr('placeholder', 'Filter...')
+      .on('input', function(event, col) {
+        filters[col] = event.target.value;
+        draw();
+      });
+
+    function draw() {
+      const data = filteredRows();
+      tbody.selectAll('tr').remove();
+
+      const trs = tbody.selectAll('tr')
+        .data(data)
+        .enter().append('tr');
+
+      trs.selectAll('td')
+        .data(row => columns.map(col => ({ col, val: row[col] })))
+        .enter().append('td')
+        .text(d => d.val ?? '')
+        .style('background', d =>
+          d.col === 'Score' && d.val != null ? colorScale(+d.val) : null
+        )
+        .style('color', d => d.col === 'Score' ? '#111' : null)
+        .style('font-weight', d => d.col === 'Score' ? '700' : null);
     }
 
-    if (validData.length === 0) {
-      plotDiv.textContent = "No DBH data found. Check the field name in your GeoJSON.";
-      return;
-    }
-
-    const plot = Plot.plot({
-      marginLeft: 50,
-      marginRight: 20,
-      marginBottom: 50,
-      width: plotWidth,
-      height: 300,
-      style: {
-        background: "#222",
-        color: "#eee",
-        fontFamily: "sans-serif"
-      },
-      x: {
-        label: "Diameter at Breast Height (inches) →",
-        labelAnchor: "center",
-      },
-      y: {
-        label: "↑ Tree count",
-        labelAnchor: "center",
-        grid: true,
-      },
-      marks: [
-        Plot.rectY(
-          validData,
-          Plot.binX({ y: "count" }, { x: "dbh", fill: "#4caf7d", thresholds: 40 })
-        ),
-        Plot.ruleY([0], { stroke: "#888" })
-      ]
-    });
-
-    plotDiv.appendChild(plot);
+    draw();
   });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   function waitForPlotDiv() {
     if (document.getElementById('plot')) {
-      renderTreeDBHPlot();
+      renderTable();
     } else {
       setTimeout(waitForPlotDiv, 50);
     }

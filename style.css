@@ -178,3 +178,56 @@ details[open] .mapboxgl-popup-content summary::after,
     color: #888;
     font-size: 13px;
 }
+
+/* Resort data table */
+.resort-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.resort-table th {
+    background: #1a1a2e;
+    color: #90caf9;
+    padding: 8px 10px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid #333;
+}
+
+.resort-table thead tr:nth-child(2) td {
+    background: #111;
+    padding: 4px 6px;
+    border-bottom: 1px solid #333;
+}
+
+.resort-table thead input {
+    width: 100%;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 3px;
+    color: #eee;
+    padding: 3px 6px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.resort-table thead input:focus {
+    outline: none;
+    border-color: #00853e;
+}
+
+.resort-table tbody tr {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.resort-table tbody tr:hover {
+    background: #1e1e1e;
+}
+
+.resort-table td {
+    padding: 7px 10px;
+    color: #ddd;
+    white-space: nowrap;
+}
